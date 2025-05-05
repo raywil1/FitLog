@@ -27,6 +27,9 @@ import TrainingTemplates from "./TrainingTemplates";
 
 const Home = () => {
   const [activeTab, setActiveTab] = React.useState("dashboard");
+  const [currentGoal, setCurrentGoal] = React.useState<"bulking" | "cutting">(
+    "bulking",
+  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -40,7 +43,9 @@ const Home = () => {
 
           <div className="flex items-center gap-4">
             <Badge variant="outline" className="bg-primary/10">
-              <span className="text-primary">Bulking Mode</span>
+              <span className="text-primary">
+                {currentGoal === "bulking" ? "Bulking" : "Cutting"} Mode
+              </span>
             </Badge>
 
             <Avatar>
@@ -87,7 +92,10 @@ const Home = () => {
 
           {/* Tab Content */}
           <TabsContent value="dashboard" className="space-y-4">
-            <Dashboard />
+            <Dashboard
+              currentGoal={currentGoal}
+              onChangeGoal={setCurrentGoal}
+            />
           </TabsContent>
 
           <TabsContent value="workout" className="space-y-4">
@@ -99,7 +107,7 @@ const Home = () => {
           </TabsContent>
 
           <TabsContent value="meals" className="space-y-4">
-            <MealPlanner />
+            <MealPlanner currentGoal={currentGoal} />
           </TabsContent>
 
           <TabsContent value="profile" className="space-y-4">
@@ -131,7 +139,9 @@ const Home = () => {
 
                   <div>
                     <h3 className="text-sm font-medium">Current Goal</h3>
-                    <p className="text-sm text-muted-foreground">Bulking</p>
+                    <p className="text-sm text-muted-foreground">
+                      {currentGoal}
+                    </p>
                   </div>
 
                   <div>

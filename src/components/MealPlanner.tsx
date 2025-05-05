@@ -49,6 +49,14 @@ interface MealPlan {
   carbs: number;
   fat: number;
   meals: Meal[];
+  description?: string;
+  duration?: string;
+}
+
+interface Ingredient {
+  name: string;
+  amount: string;
+  measurement: string;
 }
 
 interface Meal {
@@ -59,7 +67,10 @@ interface Meal {
   protein: number;
   carbs: number;
   fat: number;
-  ingredients: string[];
+  ingredients: Ingredient[];
+  instructions?: string[];
+  prepTime?: string;
+  cookTime?: string;
 }
 
 const MealPlanner: React.FC<MealPlannerProps> = ({
@@ -96,11 +107,19 @@ const MealPlanner: React.FC<MealPlannerProps> = ({
           carbs: 70,
           fat: 20,
           ingredients: [
-            "Oatmeal (1 cup)",
-            "Banana (1)",
-            "Protein powder (2 scoops)",
-            "Peanut butter (2 tbsp)",
-            "Milk (1 cup)",
+            { name: "Oatmeal", amount: "1", measurement: "cup" },
+            { name: "Banana", amount: "1", measurement: "medium" },
+            { name: "Protein powder", amount: "2", measurement: "scoops" },
+            { name: "Peanut butter", amount: "2", measurement: "tbsp" },
+            { name: "Milk", amount: "1", measurement: "cup" },
+          ],
+          prepTime: "5 minutes",
+          cookTime: "5 minutes",
+          instructions: [
+            "Bring water to a boil and add oatmeal. Cook for 3-5 minutes, stirring occasionally.",
+            "Mix in protein powder until fully dissolved.",
+            "Top with sliced banana and peanut butter.",
+            "Serve with a glass of milk on the side.",
           ],
         },
         {
@@ -112,10 +131,18 @@ const MealPlanner: React.FC<MealPlannerProps> = ({
           carbs: 30,
           fat: 15,
           ingredients: [
-            "Greek yogurt (1 cup)",
-            "Berries (1/2 cup)",
-            "Almonds (1/4 cup)",
-            "Honey (1 tsp)",
+            { name: "Greek yogurt", amount: "1", measurement: "cup" },
+            { name: "Mixed berries", amount: "1/2", measurement: "cup" },
+            { name: "Almonds", amount: "1/4", measurement: "cup" },
+            { name: "Honey", amount: "1", measurement: "tsp" },
+          ],
+          prepTime: "5 minutes",
+          cookTime: "0 minutes",
+          instructions: [
+            "Add Greek yogurt to a bowl.",
+            "Top with mixed berries and almonds.",
+            "Drizzle honey over the top.",
+            "Mix and enjoy.",
           ],
         },
         {
@@ -127,11 +154,21 @@ const MealPlanner: React.FC<MealPlannerProps> = ({
           carbs: 80,
           fat: 20,
           ingredients: [
-            "Chicken breast (8 oz)",
-            "Brown rice (1.5 cups)",
-            "Broccoli (1 cup)",
-            "Olive oil (1 tbsp)",
-            "Sweet potato (1 medium)",
+            { name: "Chicken breast", amount: "8", measurement: "oz" },
+            { name: "Brown rice", amount: "1.5", measurement: "cups" },
+            { name: "Broccoli", amount: "1", measurement: "cup" },
+            { name: "Olive oil", amount: "1", measurement: "tbsp" },
+            { name: "Sweet potato", amount: "1", measurement: "medium" },
+          ],
+          prepTime: "10 minutes",
+          cookTime: "25 minutes",
+          instructions: [
+            "Season chicken breast with salt and pepper.",
+            "Heat olive oil in a pan over medium heat and cook chicken for 6-7 minutes per side until fully cooked.",
+            "Cook brown rice according to package instructions.",
+            "Steam broccoli for 5 minutes until tender but still crisp.",
+            "Bake sweet potato in the oven at 400°F for 45 minutes or microwave for 5-8 minutes.",
+            "Plate all components and serve.",
           ],
         },
         {
@@ -143,10 +180,19 @@ const MealPlanner: React.FC<MealPlannerProps> = ({
           carbs: 40,
           fat: 10,
           ingredients: [
-            "Protein shake (1 scoop)",
-            "Banana (1)",
-            "Ezekiel bread (2 slices)",
-            "Avocado (1/4)",
+            { name: "Protein powder", amount: "1", measurement: "scoop" },
+            { name: "Banana", amount: "1", measurement: "medium" },
+            { name: "Ezekiel bread", amount: "2", measurement: "slices" },
+            { name: "Avocado", amount: "1/4", measurement: "whole" },
+            { name: "Water", amount: "8", measurement: "oz" },
+          ],
+          prepTime: "3 minutes",
+          cookTime: "2 minutes",
+          instructions: [
+            "Toast the Ezekiel bread until golden brown.",
+            "Mash the avocado and spread it on the toast.",
+            "Mix protein powder with water in a shaker bottle until smooth.",
+            "Enjoy with a banana on the side.",
           ],
         },
         {
@@ -158,11 +204,27 @@ const MealPlanner: React.FC<MealPlannerProps> = ({
           carbs: 70,
           fat: 25,
           ingredients: [
-            "Salmon (8 oz)",
-            "Quinoa (1 cup)",
-            "Asparagus (1 cup)",
-            "Olive oil (1 tbsp)",
-            "Sweet potato (1 medium)",
+            { name: "Salmon", amount: "8", measurement: "oz" },
+            { name: "Quinoa", amount: "1", measurement: "cup" },
+            { name: "Asparagus", amount: "1", measurement: "cup" },
+            { name: "Olive oil", amount: "1", measurement: "tbsp" },
+            { name: "Sweet potato", amount: "1", measurement: "medium" },
+            { name: "Lemon", amount: "1/2", measurement: "whole" },
+            { name: "Garlic", amount: "2", measurement: "cloves" },
+            { name: "Salt and pepper", amount: "1/4", measurement: "tsp each" },
+          ],
+          prepTime: "10 minutes",
+          cookTime: "25 minutes",
+          instructions: [
+            "Preheat oven to 400°F.",
+            "Season salmon with salt, pepper, and minced garlic.",
+            "Place salmon on a baking sheet and drizzle with half the olive oil.",
+            "Bake for 12-15 minutes until salmon flakes easily with a fork.",
+            "Meanwhile, cook quinoa according to package instructions.",
+            "Trim asparagus and toss with remaining olive oil, salt, and pepper.",
+            "Roast asparagus in the oven for the last 10 minutes of salmon cooking time.",
+            "Microwave or bake sweet potato until tender.",
+            "Plate all components and squeeze fresh lemon over the salmon before serving.",
           ],
         },
         {
@@ -174,9 +236,18 @@ const MealPlanner: React.FC<MealPlannerProps> = ({
           carbs: 10,
           fat: 15,
           ingredients: [
-            "Cottage cheese (1 cup)",
-            "Casein protein (1 scoop)",
-            "Almond butter (1 tbsp)",
+            { name: "Cottage cheese", amount: "1", measurement: "cup" },
+            { name: "Casein protein", amount: "1", measurement: "scoop" },
+            { name: "Almond butter", amount: "1", measurement: "tbsp" },
+            { name: "Cinnamon", amount: "1/4", measurement: "tsp" },
+          ],
+          prepTime: "3 minutes",
+          cookTime: "0 minutes",
+          instructions: [
+            "Mix cottage cheese and casein protein powder in a bowl until well combined.",
+            "Stir in almond butter.",
+            "Sprinkle with cinnamon for added flavor.",
+            "Consume 30-60 minutes before bedtime for optimal overnight protein synthesis.",
           ],
         },
       ],
@@ -199,11 +270,23 @@ const MealPlanner: React.FC<MealPlannerProps> = ({
           carbs: 30,
           fat: 10,
           ingredients: [
-            "Egg whites (1 cup)",
-            "Whole egg (1)",
-            "Ezekiel bread (1 slice)",
-            "Spinach (1 cup)",
-            "Bell peppers (1/2 cup)",
+            { name: "Egg whites", amount: "1", measurement: "cup" },
+            { name: "Whole egg", amount: "1", measurement: "large" },
+            { name: "Ezekiel bread", amount: "1", measurement: "slice" },
+            { name: "Spinach", amount: "1", measurement: "cup" },
+            { name: "Bell peppers", amount: "1/2", measurement: "cup" },
+            { name: "Olive oil spray", amount: "1", measurement: "spray" },
+            { name: "Salt and pepper", amount: "1/8", measurement: "tsp each" },
+          ],
+          prepTime: "5 minutes",
+          cookTime: "8 minutes",
+          instructions: [
+            "Heat a non-stick pan over medium heat and spray with olive oil.",
+            "Sauté chopped bell peppers for 2 minutes.",
+            "Add spinach and cook until wilted, about 1 minute.",
+            "Pour in egg whites and whole egg, season with salt and pepper.",
+            "Scramble until fully cooked but still moist.",
+            "Toast Ezekiel bread and serve with the egg scramble on top.",
           ],
         },
         {
@@ -215,9 +298,19 @@ const MealPlanner: React.FC<MealPlannerProps> = ({
           carbs: 15,
           fat: 5,
           ingredients: [
-            "Greek yogurt (3/4 cup)",
-            "Berries (1/4 cup)",
-            "Protein powder (1/2 scoop)",
+            { name: "Greek yogurt", amount: "3/4", measurement: "cup" },
+            { name: "Mixed berries", amount: "1/4", measurement: "cup" },
+            { name: "Protein powder", amount: "1/2", measurement: "scoop" },
+            { name: "Stevia", amount: "1", measurement: "packet" },
+            { name: "Cinnamon", amount: "1/8", measurement: "tsp" },
+          ],
+          prepTime: "3 minutes",
+          cookTime: "0 minutes",
+          instructions: [
+            "Add Greek yogurt to a bowl.",
+            "Mix in protein powder until fully incorporated.",
+            "Top with mixed berries.",
+            "Sprinkle with cinnamon and stevia if desired for added sweetness.",
           ],
         },
         {
@@ -229,10 +322,26 @@ const MealPlanner: React.FC<MealPlannerProps> = ({
           carbs: 40,
           fat: 15,
           ingredients: [
-            "Chicken breast (6 oz)",
-            "Sweet potato (small)",
-            "Green beans (1 cup)",
-            "Olive oil (1/2 tbsp)",
+            { name: "Chicken breast", amount: "6", measurement: "oz" },
+            { name: "Sweet potato", amount: "1", measurement: "small" },
+            { name: "Green beans", amount: "1", measurement: "cup" },
+            { name: "Olive oil", amount: "1/2", measurement: "tbsp" },
+            { name: "Garlic powder", amount: "1/4", measurement: "tsp" },
+            { name: "Paprika", amount: "1/4", measurement: "tsp" },
+            { name: "Salt and pepper", amount: "1/8", measurement: "tsp each" },
+            { name: "Lemon", amount: "1/4", measurement: "whole" },
+          ],
+          prepTime: "10 minutes",
+          cookTime: "25 minutes",
+          instructions: [
+            "Preheat oven to 375°F.",
+            "Season chicken breast with garlic powder, paprika, salt, and pepper.",
+            "Heat olive oil in an oven-safe pan over medium-high heat.",
+            "Sear chicken for 2-3 minutes per side until golden.",
+            "Transfer pan to oven and bake for 15-18 minutes until chicken reaches 165°F internally.",
+            "Meanwhile, pierce sweet potato with a fork and microwave for 5-6 minutes until tender.",
+            "Steam green beans for 5 minutes until crisp-tender.",
+            "Squeeze fresh lemon over chicken before serving.",
           ],
         },
         {
@@ -244,9 +353,18 @@ const MealPlanner: React.FC<MealPlannerProps> = ({
           carbs: 10,
           fat: 5,
           ingredients: [
-            "Protein shake (1 scoop)",
-            "Apple (1 small)",
-            "Almonds (10)",
+            { name: "Protein powder", amount: "1", measurement: "scoop" },
+            { name: "Water", amount: "8", measurement: "oz" },
+            { name: "Apple", amount: "1", measurement: "small" },
+            { name: "Almonds", amount: "10", measurement: "whole" },
+            { name: "Cinnamon", amount: "1/8", measurement: "tsp" },
+          ],
+          prepTime: "2 minutes",
+          cookTime: "0 minutes",
+          instructions: [
+            "Mix protein powder with water in a shaker bottle until smooth.",
+            "Slice apple and sprinkle with cinnamon if desired.",
+            "Consume with almonds as a satisfying pre-workout snack.",
           ],
         },
         {
@@ -258,11 +376,27 @@ const MealPlanner: React.FC<MealPlannerProps> = ({
           carbs: 30,
           fat: 15,
           ingredients: [
-            "Lean ground turkey (6 oz)",
-            "Quinoa (1/2 cup)",
-            "Zucchini (1 cup)",
-            "Broccoli (1 cup)",
-            "Olive oil (1/2 tbsp)",
+            { name: "Lean ground turkey", amount: "6", measurement: "oz" },
+            { name: "Quinoa", amount: "1/2", measurement: "cup" },
+            { name: "Zucchini", amount: "1", measurement: "cup" },
+            { name: "Broccoli", amount: "1", measurement: "cup" },
+            { name: "Olive oil", amount: "1/2", measurement: "tbsp" },
+            { name: "Garlic", amount: "2", measurement: "cloves" },
+            { name: "Onion", amount: "1/4", measurement: "cup" },
+            { name: "Low-sodium soy sauce", amount: "1", measurement: "tsp" },
+            { name: "Italian herbs", amount: "1/2", measurement: "tsp" },
+          ],
+          prepTime: "10 minutes",
+          cookTime: "20 minutes",
+          instructions: [
+            "Cook quinoa according to package instructions.",
+            "Heat olive oil in a large pan over medium heat.",
+            "Add minced garlic and diced onion, sauté until fragrant.",
+            "Add ground turkey and cook until no longer pink, breaking it up as it cooks.",
+            "Season with Italian herbs, salt, and pepper.",
+            "Add chopped zucchini and broccoli, cook for 5-7 minutes until vegetables are tender-crisp.",
+            "Stir in cooked quinoa and low-sodium soy sauce.",
+            "Cook for another 2 minutes to combine flavors.",
           ],
         },
         {
@@ -274,8 +408,18 @@ const MealPlanner: React.FC<MealPlannerProps> = ({
           carbs: 5,
           fat: 10,
           ingredients: [
-            "Cottage cheese (1/2 cup)",
-            "Casein protein (1/2 scoop)",
+            { name: "Cottage cheese", amount: "1/2", measurement: "cup" },
+            { name: "Casein protein", amount: "1/2", measurement: "scoop" },
+            { name: "Cinnamon", amount: "1/8", measurement: "tsp" },
+            { name: "Stevia", amount: "1/2", measurement: "packet" },
+          ],
+          prepTime: "2 minutes",
+          cookTime: "0 minutes",
+          instructions: [
+            "Mix cottage cheese and casein protein powder in a bowl.",
+            "Add stevia for sweetness if desired.",
+            "Sprinkle with cinnamon.",
+            "Consume 30-60 minutes before bedtime to support overnight recovery.",
           ],
         },
       ],
@@ -484,21 +628,71 @@ const MealPlanner: React.FC<MealPlannerProps> = ({
                               </div>
                             </div>
                             <Separator className="my-2" />
-                            <div>
-                              <h4 className="text-sm font-medium mb-1">
-                                Ingredients:
-                              </h4>
-                              <ul className="text-sm space-y-1">
-                                {meal.ingredients.map((ingredient, idx) => (
-                                  <li
-                                    key={idx}
-                                    className="flex items-center gap-2"
-                                  >
-                                    <ChevronRight className="h-3 w-3 text-muted-foreground" />
-                                    {ingredient}
-                                  </li>
-                                ))}
-                              </ul>
+                            <div className="space-y-4">
+                              <div>
+                                <h4 className="text-sm font-medium mb-1">
+                                  Ingredients:
+                                </h4>
+                                <ul className="text-sm space-y-1">
+                                  {meal.ingredients.map((ingredient, idx) => (
+                                    <li
+                                      key={idx}
+                                      className="flex items-center gap-2"
+                                    >
+                                      <ChevronRight className="h-3 w-3 text-muted-foreground" />
+                                      {typeof ingredient === "string" ? (
+                                        ingredient
+                                      ) : (
+                                        <span>
+                                          {ingredient.name}{" "}
+                                          <span className="text-muted-foreground">
+                                            ({ingredient.amount}{" "}
+                                            {ingredient.measurement})
+                                          </span>
+                                        </span>
+                                      )}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+
+                              {meal.prepTime && meal.cookTime && (
+                                <div className="flex gap-4 text-sm">
+                                  <div>
+                                    <span className="font-medium">Prep:</span>{" "}
+                                    <span className="text-muted-foreground">
+                                      {meal.prepTime}
+                                    </span>
+                                  </div>
+                                  <div>
+                                    <span className="font-medium">Cook:</span>{" "}
+                                    <span className="text-muted-foreground">
+                                      {meal.cookTime}
+                                    </span>
+                                  </div>
+                                </div>
+                              )}
+
+                              {meal.instructions &&
+                                meal.instructions.length > 0 && (
+                                  <div>
+                                    <h4 className="text-sm font-medium mb-1">
+                                      Instructions:
+                                    </h4>
+                                    <ol className="text-sm space-y-1 list-decimal list-inside">
+                                      {meal.instructions.map(
+                                        (instruction, idx) => (
+                                          <li
+                                            key={idx}
+                                            className="text-muted-foreground"
+                                          >
+                                            {instruction}
+                                          </li>
+                                        ),
+                                      )}
+                                    </ol>
+                                  </div>
+                                )}
                             </div>
                           </div>
                         ))}

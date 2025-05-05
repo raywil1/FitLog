@@ -27,6 +27,7 @@ import TrainingTemplates from "./TrainingTemplates";
 
 interface DashboardProps {
   currentGoal?: "bulking" | "cutting";
+  onChangeGoal?: (goal: "bulking" | "cutting") => void;
   recentWorkouts?: Array<{
     id: string;
     date: string;
@@ -42,6 +43,7 @@ interface DashboardProps {
 
 const Dashboard = ({
   currentGoal = "bulking",
+  onChangeGoal = () => {},
   recentWorkouts = [
     {
       id: "1",
@@ -68,7 +70,7 @@ const Dashboard = ({
   mealPlanProgress = 85,
   workoutProgress = 70,
   calorieGoal = currentGoal === "bulking" ? 3200 : 2200,
-  proteinGoal = 180,
+  proteinGoal = currentGoal === "bulking" ? 180 : 160,
 }: DashboardProps) => {
   return (
     <div className="bg-background min-h-screen p-6">
@@ -86,19 +88,28 @@ const Dashboard = ({
           <div className="flex items-center gap-2">
             <Badge
               variant={currentGoal === "bulking" ? "default" : "outline"}
-              className="flex items-center gap-1"
+              className="flex items-center gap-1 cursor-pointer"
+              onClick={() => onChangeGoal("bulking")}
             >
               <ArrowUpCircle className="h-4 w-4" />
               Bulking
             </Badge>
             <Badge
               variant={currentGoal === "cutting" ? "default" : "outline"}
-              className="flex items-center gap-1"
+              className="flex items-center gap-1 cursor-pointer"
+              onClick={() => onChangeGoal("cutting")}
             >
               <ArrowDownCircle className="h-4 w-4" />
               Cutting
             </Badge>
-            <Button size="sm">Change Goal</Button>
+            <Button
+              size="sm"
+              onClick={() =>
+                onChangeGoal(currentGoal === "bulking" ? "cutting" : "bulking")
+              }
+            >
+              Switch to {currentGoal === "bulking" ? "Cutting" : "Bulking"}
+            </Button>
           </div>
         </div>
 
